@@ -20,7 +20,7 @@ CHIP MyALU {
         C1, // Control Bit 1
         C2, // Control Bit 2
         C3,  // Control Bit 3
-		C4,  // Control Bit 4 (Most significant - 5th Control bit)
+	C4;  // Control Bit 4 (Most significant - 5th Control bit)
         
 
     OUT 
@@ -31,45 +31,47 @@ CHIP MyALU {
     PARTS:
 	
 	Not16(in=x,out=notx);  				//not x
-	And16(a=x,y=notx,out=zero);			//0
-	And16(a=x,y=x,out=one);				//1	
+	And16(a=x,b=notx,out=zero);			//0
+	Inc16(in=false,out=one);			//1	
 										//Y is input
 	Not16(in=zero,out=negone);			//-1
 	Not16(in=y,out=noty);				//not y
 										//X is input too
-	Inc16(in=noty,out=negx);			// -x
+	Inc16(in=notx,out=negx);			// -x
 	
-	Add16(a=y, b=negx, out=ynegx);		//y - x
+	Add16(a=y, b=negx, out=ynegx);			//y - x
 	Inc16(in=noty,out=negy);			//-y
-	Add16(a=x,b=negy,out=xnegx);		// x - y
+	Add16(a=x,b=negy,out=xnegx);			// x - y
 	Inc16(in=x,out=incx);				// x + 1
 	Inc16(in=y,out=incy);				// y + 1
-	Add16(a=x, b=negone, out=xnegone);	// x - 1
-	Add16(a=y, b=negone, out=ynegone);	// y - 1
+	Add16(a=x, b=negone, out=xnegone);		// x - 1
+	Add16(a=y, b=negone, out=ynegone);		// y - 1
 	Add16(a=x, b=y, out=xaddy);			// x + y
 	
 	
 	And16(a=x, b=y, out=xandy);			// x AND y
 	Xor16(a=x, b=y, out=xxory);			// x XOR y
-	Not16(in=xxory, out=notxxory);		// x NXOR y
+	Not16(in=xxory, out=notxxory);			// x NXOR y
 	Or16(a=x, b=y, out=xory);			// x OR y
+
 	
 	
-	Mux8Way16(a=zero,b=one,c=negone,d=x,e=y,f=notx,g=noty,h=negx,sel=[0..2], out=firstmux);   //first split of arthematic mux
-	Mux8Way16(a=negy,b=incx,c=incy,d=xnegone,e=ynegone,f=xaddy,g=xnegx,h=ynegx,sel=[C0..C2], out=secondmux);   //2nd split of arthematic mux
+	Mux8Way16(a=zero,b=one,c=negone,d=x,e=y,f=notx,g=noty,h=negx,sel[0]=C0,sel[1]=C1,sel[2]=C2, out=firstmux);  
+	//first split of arthematic mux
+
+	Mux8Way16(a=negy,b=incx,c=incy,d=xnegone,e=ynegone,f=xaddy,g=xnegx,h=ynegx,sel[0]=C0,sel[1]=C1,sel[2]=C2, out=secondmux); 
+	//2nd split of arthematic mux
 	
-	Mux2Way16(a=firstmux,b=secondmux,sel[C3],out=2ndlayeredmux); //choosing which of the 2 mux8way16
+	Mux16(a=firstmux,b=secondmux,sel=C3,out=Secondndlayeredmux); //choosing which of the 2 mux8way16
 	
+	Mux4Way16(a=xandy,b=xory,c=xory,d=notxxory,sel[0]=C0,sel[1]=C1,out=logicmux); //finding out which logic to use
 	
-	Mux4Way16(a=xandy,b=xory,c=notxxory,d=xory,sel[C0..C1],out=logicmux); //finding out which logic to use
+	Mux16(a=Secondndlayeredmux,b=logicmux,sel=C4,out=out,out[0..15]=out1, out[15]=out2); //choosing either logic or arthematic
+
+	Or16Way(in=out1, out=zr1);//All outputs are zero then zr is 1
+    	Not(in=zr1, out=zr);
+
+	And(a=out2, b=true, out=ng);//Most significant bit is 1 then ng is 1
 	
-	Mux2Way16(a=2ndlayeredmux,b=logicmux,sel[C4],out=out); //choosing either logic or arthematic
-	
-	
-	
-	
-	
-	
-   
- 
+
 }
