@@ -9,12 +9,87 @@
  *       b otherwise
  */
 
-CHIP Mux {
-    IN a, b, sel;
-    OUT out;
+CHIP Mux{
+    IN a[16], b[16], sel;
+    OUT out[16];
     PARTS:
-    	Not(in=sel, out=NotSel);
-	And(a=a, b=NotSel, out=FirstAnd);
-	And(a=b, b=sel, out=SecondAnd);
-	Or(a=FirstAnd, b=SecondAnd, out=out);
+    	Not(in=sel, out=NotSel0);
+	And(a=a[0], b=NotSel0, out=FirstAnd0);
+	And(a=b[0], b=sel, out=SecondAnd0);
+	Or(a=FirstAnd0, b=SecondAnd0, out=out[0]);
+
+    	Not(in=sel, out=NotSel1);
+	And(a=a[1], b=NotSel1, out=FirstAnd1);
+	And(a=b[1], b=sel, out=SecondAnd1);
+	Or(a=FirstAnd1, b=SecondAnd1, out=out[1]);
+
+    	Not(in=sel, out=NotSel2);
+	And(a=a[2], b=NotSel2, out=FirstAnd2);
+	And(a=b[2], b=sel, out=SecondAnd2);
+	Or(a=FirstAnd2, b=SecondAnd2, out=out[2]);
+
+    	Not(in=sel, out=NotSel3);
+	And(a=a[3], b=NotSel3, out=FirstAnd3);
+	And(a=b[3], b=sel, out=SecondAnd3);
+	Or(a=FirstAnd3, b=SecondAnd3, out=out[3]);
+
+    	Not(in=sel, out=NotSel4);
+	And(a=a[4], b=NotSel4, out=FirstAnd4);
+	And(a=b[4], b=sel, out=SecondAnd4);
+	Or(a=FirstAnd4, b=SecondAnd4, out=out[4]);
+
+    	Not(in=sel, out=NotSel5);
+	And(a=a[5], b=NotSel5, out=FirstAnd5);
+	And(a=b[5], b=sel, out=SecondAnd5);
+	Or(a=FirstAnd5, b=SecondAnd5, out=out[5]);
+
+    	Not(in=sel, out=NotSel6);
+	And(a=a[6], b=NotSel6, out=FirstAnd6);
+	And(a=b[6], b=sel, out=SecondAnd6);
+	Or(a=FirstAnd6, b=SecondAnd6, out=out[6]);
+
+    	Not(in=sel, out=NotSel7);
+	And(a=a[7], b=NotSel7, out=FirstAnd7);
+	And(a=b[7], b=sel, out=SecondAnd7);
+	Or(a=FirstAnd7, b=SecondAnd7, out=out[7]);
+
+    	Not(in=sel, out=NotSel8);
+	And(a=a[8], b=NotSel8, out=FirstAnd8);
+	And(a=b[8], b=sel, out=SecondAnd8);
+	Or(a=FirstAnd8, b=SecondAnd8, out=out[8]);
+
+    	Not(in=sel, out=NotSel9);
+	And(a=a[9], b=NotSel9, out=FirstAnd9);
+	And(a=b[9], b=sel, out=SecondAnd9);
+	Or(a=FirstAnd9, b=SecondAnd9, out=out[9]);
+
+    	Not(in=sel, out=NotSel10);
+	And(a=a[10], b=NotSel10, out=FirstAnd10);
+	And(a=b[10], b=sel, out=SecondAnd10);
+	Or(a=FirstAnd10, b=SecondAnd10, out=out[10]);
+
+    	Not(in=sel, out=NotSel11);
+	And(a=a[11], b=NotSel11, out=FirstAnd11);
+	And(a=b[11], b=sel, out=SecondAnd11);
+	Or(a=FirstAnd11, b=SecondAnd11, out=out[11]);
+
+    	Not(in=sel, out=NotSel12);
+	And(a=a[12], b=NotSel12, out=FirstAnd12);
+	And(a=b[12], b=sel, out=SecondAnd12);
+	Or(a=FirstAnd12, b=SecondAnd12, out=out[12]);
+
+    	Not(in=sel, out=NotSel13);
+	And(a=a[13], b=NotSel13, out=FirstAnd13);
+	And(a=b[13], b=sel, out=SecondAnd13);
+	Or(a=FirstAnd13, b=SecondAnd13, out=out[13]);
+
+    	Not(in=sel, out=NotSel14);
+	And(a=a[14], b=NotSel14, out=FirstAnd14);
+	And(a=b[14], b=sel, out=SecondAnd14);
+	Or(a=FirstAnd14, b=SecondAnd14, out=out[14]);
+
+    	Not(in=sel, out=NotSel15);
+	And(a=a[15], b=NotSel15, out=FirstAnd15);
+	And(a=b[15], b=sel, out=SecondAnd15);
+	Or(a=FirstAnd15, b=SecondAnd15, out=out[15]);
 }

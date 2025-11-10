@@ -10,13 +10,74 @@
  */
 
 CHIP DMux {
-    IN in, sel;
-    OUT a, b;
+    IN in[16], sel;
+    OUT a[16], b[16];
 
     PARTS:
-    	Not(in=sel,out=outNot);
-	And(a=in,b=outNot, out=a);
-	And(a=in,b=sel, out=b);
+    	Not(in=sel,out=out1Not0);
+	And(a=in[0],b=out1Not0, out=a[0]);
+	And(a=in[0],b=sel, out=b[0]);
+
+    	Not(in=sel,out=out1Not1);
+	And(a=in[1],b=out1Not1, out=a[1]);
+	And(a=in[1],b=sel, out=b[1]);
+
+    	Not(in=sel,out=out1Not2);
+	And(a=in[2],b=out1Not2, out=a[2]);
+	And(a=in[2],b=sel, out=b[2]);
+
+    	Not(in=sel,out=out1Not3);
+	And(a=in[3],b=out1Not3, out=a[3]);
+	And(a=in[3],b=sel, out=b[3]);
+
+    	Not(in=sel,out=out1Not4);
+	And(a=in[4],b=out1Not4, out=a[4]);
+	And(a=in[4],b=sel, out=b[4]);
+
+    	Not(in=sel,out=out1Not5);
+	And(a=in[5],b=out1Not5, out=a[5]);
+	And(a=in[5],b=sel, out=b[5]);
+
+    	Not(in=sel,out=out1Not6);
+	And(a=in[6],b=out1Not6, out=a[6]);
+	And(a=in[6],b=sel, out=b[6]);
+
+    	Not(in=sel,out=out1Not7);
+	And(a=in[7],b=out1Not7, out=a[7]);
+	And(a=in[7],b=sel, out=b[7]);
+
+    	Not(in=sel,out=out1Not8);
+	And(a=in[8],b=out1Not8, out=a[8]);
+	And(a=in[8],b=sel, out=b[8]);
+
+    	Not(in=sel,out=out1Not9);
+	And(a=in[9],b=out1Not9, out=a[9]);
+	And(a=in[9],b=sel, out=b[9]);
+
+    	Not(in=sel,out=out1Not10);
+	And(a=in[10],b=out1Not10, out=a[10]);
+	And(a=in[10],b=sel, out=b[10]);
+
+    	Not(in=sel,out=out1Not11);
+	And(a=in[11],b=out1Not11, out=a[11]);
+	And(a=in[11],b=sel, out=b[11]);
+
+    	Not(in=sel,out=out1Not12);
+	And(a=in[12],b=out1Not12, out=a[12]);
+	And(a=in[12],b=sel, out=b[12]);
+
+    	Not(in=sel,out=out1Not13);
+	And(a=in[13],b=out1Not13, out=a[13]);
+	And(a=in[13],b=sel, out=b[13]);
+
+    	Not(in=sel,out=out1Not14);
+	And(a=in[14],b=out1Not14, out=a[14]);
+	And(a=in[14],b=sel, out=b[14]);
+
+    	Not(in=sel,out=out1Not15);
+	And(a=in[15],b=out1Not15, out=a[15]);
+	And(a=in[15],b=sel, out=b[15]);
+
 	
     
 }
