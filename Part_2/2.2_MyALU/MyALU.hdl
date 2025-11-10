@@ -1,0 +1,75 @@
+
+/**
+ * The MyALU. is the ALU of YOUR OWN design that provides the same functions as in the Nand2Tetris project + additional functions (and uses different control bits.
+ * Computes one of the following functions:
+ * x+y, x-y, y-x, 0, 1, -1, x, y, -x, -y, !x, !y,
+ * x+1, y+1, x-1, y-1, x&y, x|y , x XOR y, x NXOR y on two 16-bit inputs, 
+ * according to 6 input bits denoted zx,nx,zy,ny,f,no.
+ * In addition, the ALU computes two 1-bit outputs:
+ * if the ALU output == 0, zr is set to 1; otherwise zr is set to 0;
+ * if the ALU output < 0, ng is set to 1; otherwise ng is set to 0.
+ */
+
+// Implementation: the ALU logic manipulates the x and y inputs
+
+
+CHIP MyALU {
+    IN  
+        x[16], y[16],  // 16-bit inputs        
+        C0, // Control Bit 0 (Least significant) 
+        C1, // Control Bit 1
+        C2, // Control Bit 2
+        C3,  // Control Bit 3
+		C4,  // Control Bit 4 (Most significant - 5th Control bit)
+        
+
+    OUT 
+        out[16], // 16-bit output
+        zr, // 1 if (out == 0), 0 otherwise
+        ng; // 1 if (out < 0),  0 otherwise
+
+    PARTS:
+	
+	Not16(in=x,out=notx);  				//not x
+	And16(a=x,y=notx,out=zero);			//0
+	And16(a=x,y=x,out=one);				//1	
+										//Y is input
+	Not16(in=zero,out=negone);			//-1
+	Not16(in=y,out=noty);				//not y
+										//X is input too
+	Inc16(in=noty,out=negx);			// -x
+	
+	Add16(a=y, b=negx, out=ynegx);		//y - x
+	Inc16(in=noty,out=negy);			//-y
+	Add16(a=x,b=negy,out=xnegx);		// x - y
+	Inc16(in=x,out=incx);				// x + 1
+	Inc16(in=y,out=incy);				// y + 1
+	Add16(a=x, b=negone, out=xnegone);	// x - 1
+	Add16(a=y, b=negone, out=ynegone);	// y - 1
+	Add16(a=x, b=y, out=xaddy);			// x + y
+	
+	
+	And16(a=x, b=y, out=xandy);			// x AND y
+	Xor16(a=x, b=y, out=xxory);			// x XOR y
+	Not16(in=xxory, out=notxxory);		// x NXOR y
+	Or16(a=x, b=y, out=xory);			// x OR y
+	
+	
+	Mux8Way16(a=zero,b=one,c=negone,d=x,e=y,f=notx,g=noty,h=negx,sel=[0..2], out=firstmux);   //first split of arthematic mux
+	Mux8Way16(a=negy,b=incx,c=incy,d=xnegone,e=ynegone,f=xaddy,g=xnegx,h=ynegx,sel=[C0..C2], out=secondmux);   //2nd split of arthematic mux
+	
+	Mux2Way16(a=firstmux,b=secondmux,sel[C3],out=2ndlayeredmux); //choosing which of the 2 mux8way16
+	
+	
+	Mux4Way16(a=xandy,b=xory,c=notxxory,d=xory,sel[C0..C1],out=logicmux); //finding out which logic to use
+	
+	Mux2Way16(a=2ndlayeredmux,b=logicmux,sel[C4],out=out); //choosing either logic or arthematic
+	
+	
+	
+	
+	
+	
+   
+ 
+}

@@ -1,0 +1,20 @@
+CHIP MyXor{
+IN a,b;
+OUT out;
+
+//builtIn can use previous one?
+
+PARTS:
+	Nand(a=a,b=a,out=NotA);
+	Nand(a=b,b=b,out=NotB);
+	Nand(a=NotA,b=b,out=FirstNandGate);
+	Nand(a=a,b=NotB,out=SecondNandGate);
+	Nand(a=FirstNandGate,b=FirstNandGate,out=FirstAndGate);
+	Nand(a=SecondNandGate,b=SecondNandGate,out=SecondAndGate);
+	Nand(a=FirstAndGate,b=FirstAndGate,out=FirstOr);
+	Nand(a=SecondAndGate,b=SecondAndGate,out=SecondOr);
+	Nand(a=FirstOr,b=SecondOr,out=out);
+
+
+
+}

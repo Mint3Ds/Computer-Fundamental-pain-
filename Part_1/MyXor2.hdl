@@ -1,0 +1,11 @@
+CHIP MyXor2{
+IN a,b;
+OUT out;
+
+PARTS:
+	Nand(a=a,b=b,out=NotAandB);
+	Nand(a=a,b=NotAandB,out=FirstNand);
+	Nand(a=NotAandB,b=b,out=SecondNand);
+	Nand(a=FirstNand,b=SecondNand,out=out);
+
+}
