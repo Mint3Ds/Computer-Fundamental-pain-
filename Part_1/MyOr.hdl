@@ -1,11 +1,71 @@
 CHIP MyOr{
-IN a,b;
-OUT out;
+IN a[16],b[16];
+OUT out[16];
 
 PARTS:
-	Nand(a = a, b = a, out=NandOut1);
-	Nand(a = b, b = b, out=NandOut2);
- 	Nand(a = NandOut1, b = NandOut2, out = out);  
+	Nand(a = a[0], b = a[0], out=Nand1Out0);
+	Nand(a = b[0], b = b[0], out=Nand2Out0);
+ 	Nand(a = Nand1Out0, b = Nand2Out0, out = out[0]);  
+
+	Nand(a = a[1], b = a[1], out=Nand1Out1);
+	Nand(a = b[1], b = b[1], out=Nand2Out1);
+ 	Nand(a = Nand1Out1, b = Nand2Out1, out = out[1]);  
+
+	Nand(a = a[2], b = a[2], out=Nand1Out2);
+	Nand(a = b[2], b = b[2], out=Nand2Out2);
+ 	Nand(a = Nand1Out2, b = Nand2Out2, out = out[2]);  
+
+	Nand(a = a[3], b = a[3], out=Nand1Out3);
+	Nand(a = b[3], b = b[3], out=Nand2Out3);
+ 	Nand(a = Nand1Out3, b = Nand2Out3, out = out[3]);  
+
+	Nand(a = a[4], b = a[4], out=Nand1Out4);
+	Nand(a = b[4], b = b[4], out=Nand2Out4);
+ 	Nand(a = Nand1Out4, b = Nand2Out4, out = out[4]);  
+
+	Nand(a = a[5], b = a[5], out=Nand1Out5);
+	Nand(a = b[5], b = b[5], out=Nand2Out5);
+ 	Nand(a = Nand1Out5, b = Nand2Out5, out = out[5]);  
+
+	Nand(a = a[6], b = a[6], out=Nand1Out6);
+	Nand(a = b[6], b = b[6], out=Nand2Out6);
+ 	Nand(a = Nand1Out6, b = Nand2Out6, out = out[6]);  
+
+	Nand(a = a[7], b = a[7], out=Nand1Out7);
+	Nand(a = b[7], b = b[7], out=Nand2Out7);
+ 	Nand(a = Nand1Out7, b = Nand2Out7, out = out[7]);  
+
+	Nand(a = a[8], b = a[8], out=Nand1Out8);
+	Nand(a = b[8], b = b[8], out=Nand2Out8);
+ 	Nand(a = Nand1Out8, b = Nand2Out8, out = out[8]);  
+
+	Nand(a = a[9], b = a[9], out=Nand1Out9);
+	Nand(a = b[9], b = b[9], out=Nand2Out9);
+ 	Nand(a = Nand1Out9, b = Nand2Out9, out = out[9]);  
+
+	Nand(a = a[10], b = a[10], out=Nand1Out10);
+	Nand(a = b[10], b = b[10], out=Nand2Out10);
+ 	Nand(a = Nand1Out10, b = Nand2Out10, out = out[10]);  
+
+	Nand(a = a[11], b = a[11], out=Nand1Out11);
+	Nand(a = b[11], b = b[11], out=Nand2Out11);
+ 	Nand(a = Nand1Out11, b = Nand2Out11, out = out[11]);  
+
+	Nand(a = a[12], b = a[12], out=Nand1Out12);
+	Nand(a = b[12], b = b[12], out=Nand2Out12);
+ 	Nand(a = Nand1Out12, b = Nand2Out12, out = out[12]);  
+
+	Nand(a = a[13], b = a[13], out=Nand1Out13);
+	Nand(a = b[13], b = b[13], out=Nand2Out13);
+ 	Nand(a = Nand1Out13, b = Nand2Out13, out = out[13]);  
+
+	Nand(a = a[14], b = a[14], out=Nand1Out14);
+	Nand(a = b[14], b = b[14], out=Nand2Out14);
+ 	Nand(a = Nand1Out14, b = Nand2Out14, out = out[14]);  
+
+	Nand(a = a[15], b = a[15], out=Nand1Out15);
+	Nand(a = b[15], b = b[15], out=Nand2Out15);
+ 	Nand(a = Nand1Out15, b = Nand2Out15, out = out[15]);  
 
 }
 

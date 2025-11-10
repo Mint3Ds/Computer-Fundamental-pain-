@@ -1,20 +1,88 @@
 CHIP MyXor{
-IN a,b;
-OUT out;
+IN a[16],b[16];
+OUT out[16];
 
-//builtIn can use previous one?
 
 PARTS:
-	Nand(a=a,b=a,out=NotA);
-	Nand(a=b,b=b,out=NotB);
-	Nand(a=NotA,b=b,out=FirstNandGate);
-	Nand(a=a,b=NotB,out=SecondNandGate);
-	Nand(a=FirstNandGate,b=FirstNandGate,out=FirstAndGate);
-	Nand(a=SecondNandGate,b=SecondNandGate,out=SecondAndGate);
-	Nand(a=FirstAndGate,b=FirstAndGate,out=FirstOr);
-	Nand(a=SecondAndGate,b=SecondAndGate,out=SecondOr);
-	Nand(a=FirstOr,b=SecondOr,out=out);
+	Nand(a=a[0],b=b[0],out=Out1Nand0);
+	Nand(a=a[0],b=Out1Nand0,out=Out2Nand0);
+	Nand(a=b[0],b=Out1Nand0,out=Out3Nand0);
+	Nand(a=Out2Nand0,b=Out3Nand0,out=out[0]);
 
+	Nand(a=a[1],b=b[1],out=Out1Nand1);
+	Nand(a=a[1],b=Out1Nand1,out=Out2Nand1);
+	Nand(a=b[1],b=Out1Nand1,out=Out3Nand1);
+	Nand(a=Out2Nand1,b=Out3Nand1,out=out[1]);
+
+	Nand(a=a[2],b=b[2],out=Out1Nand2);
+	Nand(a=a[2],b=Out1Nand2,out=Out2Nand2);
+	Nand(a=b[2],b=Out1Nand2,out=Out3Nand2);
+	Nand(a=Out2Nand2,b=Out3Nand2,out=out[2]);
+
+	Nand(a=a[3],b=b[3],out=Out1Nand3);
+	Nand(a=a[3],b=Out1Nand3,out=Out2Nand3);
+	Nand(a=b[3],b=Out1Nand3,out=Out3Nand3);
+	Nand(a=Out2Nand3,b=Out3Nand3,out=out[3]);
+
+	Nand(a=a[4],b=b[4],out=Out1Nand4);
+	Nand(a=a[4],b=Out1Nand4,out=Out2Nand4);
+	Nand(a=b[4],b=Out1Nand4,out=Out3Nand4);
+	Nand(a=Out2Nand4,b=Out3Nand4,out=out[4]);
+
+	Nand(a=a[5],b=b[5],out=Out1Nand5);
+	Nand(a=a[5],b=Out1Nand5,out=Out2Nand5);
+	Nand(a=b[5],b=Out1Nand5,out=Out3Nand5);
+	Nand(a=Out2Nand5,b=Out3Nand5,out=out[5]);
+
+	Nand(a=a[6],b=b[6],out=Out1Nand6);
+	Nand(a=a[6],b=Out1Nand6,out=Out2Nand6);
+	Nand(a=b[6],b=Out1Nand6,out=Out3Nand6);
+	Nand(a=Out2Nand6,b=Out3Nand6,out=out[6]);
+
+	Nand(a=a[7],b=b[7],out=Out1Nand7);
+	Nand(a=a[7],b=Out1Nand7,out=Out2Nand7);
+	Nand(a=b[7],b=Out1Nand7,out=Out3Nand7);
+	Nand(a=Out2Nand7,b=Out3Nand7,out=out[7]);
+
+	Nand(a=a[8],b=b[8],out=Out1Nand8);
+	Nand(a=a[8],b=Out1Nand8,out=Out2Nand8);
+	Nand(a=b[8],b=Out1Nand8,out=Out3Nand8);
+	Nand(a=Out2Nand8,b=Out3Nand0,out=out[8]);
+
+	Nand(a=a[9],b=b[9],out=Out1Nand9);
+	Nand(a=a[9],b=Out1Nand9,out=Out2Nand9);
+	Nand(a=b[9],b=Out1Nand9,out=Out3Nand9);
+	Nand(a=Out2Nand9,b=Out3Nand9,out=out[9]);
+
+	Nand(a=a[10],b=b[10],out=Out1Nand10);
+	Nand(a=a[10],b=Out1Nand10,out=Out2Nand10);
+	Nand(a=b[10],b=Out1Nand10,out=Out3Nand10);
+	Nand(a=Out2Nand10,b=Out3Nand10,out=out[10]);
+
+	Nand(a=a[11],b=b[11],out=Out1Nand11);
+	Nand(a=a[11],b=Out1Nand11,out=Out2Nand11);
+	Nand(a=b[11],b=Out1Nand11,out=Out3Nand11);
+	Nand(a=Out2Nand11,b=Out3Nand11,out=out[11]);
+
+	Nand(a=a[12],b=b[12],out=Out1Nand12);
+	Nand(a=a[12],b=Out1Nand12,out=Out2Nand12);
+	Nand(a=b[12],b=Out1Nand12,out=Out3Nand12);
+	Nand(a=Out2Nand12,b=Out3Nand12,out=out[12]);
+
+	Nand(a=a[13],b=b[13],out=Out1Nand13);
+	Nand(a=a[13],b=Out1Nand13,out=Out2Nand13);
+	Nand(a=b[13],b=Out1Nand13,out=Out3Nand13);
+	Nand(a=Out2Nand13,b=Out3Nand13,out=out[13]);
+
+	Nand(a=a[14],b=b[14],out=Out1Nand14);
+	Nand(a=a[14],b=Out1Nand14,out=Out2Nand14);
+	Nand(a=b[14],b=Out1Nand14,out=Out3Nand14);
+	Nand(a=Out2Nand14,b=Out3Nand14,out=out[14]);
+
+	Nand(a=a[15],b=b[15],out=Out1Nand15);
+	Nand(a=a[15],b=Out1Nand15,out=Out2Nand15);
+	Nand(a=b[15],b=Out1Nand15,out=Out3Nand15);
+	Nand(a=Out2Nand15,b=Out3Nand15,out=out[15]);
 
 
 }
