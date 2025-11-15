@@ -23,5 +23,5 @@ set a %B0000000000010000,eval,output;
 set a %B0000000000010001,eval,output;
 set a %B0000000000000000,eval,output;
 set a %B0101010101010101,eval,output;
-set a %B0101010101010101,eval,output;
+set a %B1010101010101010,eval,output;
 

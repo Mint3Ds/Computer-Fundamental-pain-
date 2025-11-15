@@ -30,30 +30,46 @@ CHIP CPU {
     IN  inM[16],         // M value input  (M = contents of RAM[A])
         instruction[16], // Instruction for execution
         reset;           // Signals whether to re-start the current
-                         // program (reset=1) or continue executing
-                         // the current program (reset=0).
+                         // program (reset==1) or continue executing
+                         // the current program (reset==0).
 
     OUT outM[16],        // M value output
-        writeM,          // Write into M? 
+        writeM,          // Write to M? 
         addressM[15],    // Address in data memory (of M)
         pc[15];          // address of next instruction
 
     PARTS:
-    // Implement the CPU based on its following functionalities
+    	DMux(in=true, sel=instruction[15], a=ains, b=cins);
+        Or(a=ains, b=instruction[5], out=intoA);
+        And(a=cins, b=instruction[4], out=intoD);
+	And(a=instruction[15],b=instruction[12],out=AorM);
+
+        Mux16(a=outtM, b=instruction, sel=ains, out=ToA);
+        ARegister(in=ToA, load=intoA, out=A, out[0..14]=addressM);
+
+ 	Mux16(a=A, b=inM, sel=AorM, out=AM);
+	
+	ALU(x=D,y=AM,zx=instruction[11],nx=instruction[10],zy=instruction[9],ny=instruction[8],f=instruction[7],no=instruction[6],out=outtM,out=outM,zr=zr,	ng=ng);
+
+	DRegister(in=outtM,load=intoD,out=D);
+
+	And(a=instruction[15],b=instruction[3],out=writeM);
+
+	Nor(a=ng,b=zr,out=posnzr);
+	And(a=instruction[0],b=posnzr,out=ld1);//Jump if greater than
+
+	And(a=instruction[1],b=zr,out=ld2);//Jump if Equal
 
 
-    // Instruction decode
+	And(a=instruction[2],b=ng,out=ld3);//Jump if less than
 
 
-    // A register and input mux
+	Or3Way(a=ld1,b=ld2,c=ld3,out=ld);
+	And(a=instruction[15],b=ld,out=RealJump);
 
-    
-    // D register
-    
+	PC(in=A,load=RealJump,inc=true,reset=reset,out[0..14]=pc);
+	
 
-    // ALU and input mux
- 
+	
 
-    // PC with jump test
-   
 }
